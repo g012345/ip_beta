@@ -16,7 +16,7 @@
 /* Links */
 
 a, a:link, a:visited  {
-	text-decoration:none; outline:none; color:#fff; font-size:18px;}a:hover{ text-decoration:underline; outline:none; color:#ff3300; font-size:18px;
+	text-decoration:none; outline:none; font-size:18px;}a:hover{ text-decoration:underline; outline:none; color:#ff3300; font-size:18px;
 }
 
 a:hover  {
@@ -296,4 +296,10 @@ main{
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
+}
+.black{
+	color: #000;
+}
+.white{
+	color: white;
 }
