@@ -1,8 +1,12 @@
+let storedLinkText = localStorage.getItem('linkText');
+let nextlink = localStorage.getItem('nextContent');
+console.log(storedLinkText)
+console.log(nextlink)
 function loadSchedule() {
-    fetch('../расписание2kortom1stlb.txt')
+    fetch('../rasp.txt')
       .then(response => response.text())
       .then(data => {
-        const filteredData = filterScheduleData(data, 'Ип5-23', 'Т1-23');
+        const filteredData = filterScheduleData(data, storedLinkText, nextlink);
         parseSchedule(filteredData);
       })
       .catch(error => console.error('Произошла ошибка:', error));

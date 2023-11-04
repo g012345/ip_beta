@@ -1,5 +1,5 @@
 const burgers = document.querySelectorAll(".burger");
-const link = document.getElementById("myLink");
+const links = document.querySelectorAll(".link");
 burgers.forEach(burger => {
   burger.addEventListener("click", () => {
     const targetId = burger.getAttribute("data-target");
@@ -12,7 +12,11 @@ burgers.forEach(burger => {
     }
   });
 });
-link.addEventListener("click", function(event) {
+links.forEach(function(link) {
+  link.addEventListener("click", function(event) {
     let linkText = event.target.textContent;
-    console.log(linkText)
+    let nextContent = event.target.getAttribute("data-next");
+    localStorage.setItem('linkText', linkText);
+    localStorage.setItem('nextContent', nextContent);
+  });
 });
