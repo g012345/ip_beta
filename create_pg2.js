@@ -3,7 +3,7 @@ let nextlink = localStorage.getItem('nextContent');
 console.log(storedLinkText)
 console.log(nextlink)
 function loadSchedule() {
-    fetch('../rasp.txt')
+    fetch('../rasp2.txt')
       .then(response => response.text())
       .then(data => {
         const filteredData = filterScheduleData(data, storedLinkText, nextlink);
