@@ -23,8 +23,7 @@ if response.status_code == 200:
                 file.write(td_elements[3].get_text(strip=True) + "\n")
                 file.write(td_elements[4].get_text(strip=True) + "\n")
                 file.write(td_elements[5].get_text(strip=True) + "\n")
-else:
-    print("Ошибка при получении страницы. Код состояния:", response.status_code)
+
 
 with open('rasp3.txt', 'r', encoding='utf-8') as file:
     lines = file.readlines()

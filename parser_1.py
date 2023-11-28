@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-url = "https://rsp.chemk.org/1korp/today.htm"
+url = "https://rsp.chemk.org/1korp/tomorrow.htm"
 response = requests.get(url)
 
 if response.status_code == 200:
