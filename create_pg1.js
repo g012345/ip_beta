@@ -53,5 +53,16 @@ const parseSchedule=(data)=>{
     }
   }
 }
+document.addEventListener('DOMContentLoaded', () => {
+  const scheduleDiv = document.getElementById('schedule');
+
+  scheduleDiv.addEventListener('click', event => {
+      const clickedElement = event.target;
+      if (clickedElement.id.startsWith('paragraph-')) {
+          const paragraphContent = clickedElement.textContent;
+          alert(paragraphContent);
+      }
+  });
+});
   
   window.onload = loadSchedule;
