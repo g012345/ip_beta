@@ -57,11 +57,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const scheduleDiv = document.getElementById('schedule');
 
   scheduleDiv.addEventListener('click', event => {
-      const clickedElement = event.target;
-      if (clickedElement.id.startsWith('paragraph-')) {
-          const paragraphContent = clickedElement.textContent;
-          alert(paragraphContent);
+    const clickedElement = event.target;
+    if (clickedElement.id.startsWith('paragraph-')) {
+      const paragraphContent = clickedElement.textContent;
+
+      const numberPattern = /\d+/;
+      const match = paragraphContent.match(numberPattern);
+
+      if (match) {
+        alert(`номер пары: ${match[0]}`);
+      } else {
+        alert('В этом параграфе нет цифры.');
       }
+    }
   });
 });
   
