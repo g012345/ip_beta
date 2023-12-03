@@ -65,13 +65,18 @@ const filterScheduleData = (data, startGroup, endGroup)=>{
         const match = paragraphContent.match(numberPattern);
   
         if (match) {
-          alert(`номер пары: ${match[0]}`);
+          if (match[0].length === 3) {
+            alert(`Номер кабинета: ${match[0]}`);
+          } else if (match[0].length === 1) {
+            alert(`Номер пары: ${match[0]}`);
+          }
         } else {
           alert('В этом параграфе нет цифры.');
         }
       }
     });
   });
+  
 
 
 
