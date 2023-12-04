@@ -61,6 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (clickedElement.id.startsWith('paragraph-')) {
       const paragraphContent = clickedElement.textContent;
 
+      const groupPattern = /К\d+-\d+/;
+      const groupMatch = paragraphContent.match(groupPattern);
+      if (groupMatch) {
+        alert(`Номер группы: ${groupMatch[0]}`);
+        return; 
+      }
+
       const numberPattern = /\d+/;
       const match = paragraphContent.match(numberPattern);
 
@@ -76,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
 
   
   window.onload = loadSchedule;
