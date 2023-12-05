@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
           alert(`Номер пары: ${match[0]}`);
         }
       } else {
-        alert('В этом параграфе нет цифры.');
+        alert(`Название пары: ${clickedElement.textContent}`);
       }
     }
   });

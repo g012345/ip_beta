@@ -77,9 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (match[0].length === 1) {
           alert(`Номер пары: ${match[0]}`);
         }
-      } else {
-        alert('В этом параграфе нет цифры.');
-      }
+        } else {
+          alert(`Название пары: ${clickedElement.textContent}`);
+        }
     }
   });
 });
