@@ -1,40 +1,41 @@
-let storedLinkText = localStorage.getItem('linkText');
-let nextlink = localStorage.getItem('nextContent');
-console.log(storedLinkText)
-console.log(nextlink)
-const loadSchedule=()=>{
-    fetch('../rasp1.txt')
-      .then(response => response.text())
-      .then(data => {
-        const filteredData = filterScheduleData(data, storedLinkText, nextlink);
-        parseSchedule(filteredData);
-      })
-      .catch(error => console.error('Произошла ошибка:', error));
-  }
-  
-const filterScheduleData = (data, startGroup, endGroup)=>{
-    const lines = data.split('\n');
-    let filteredData = '';
-    let isGroupData = false;
-  
-    for (let line of lines) {
-      if (line.trim() === startGroup) {
-        isGroupData = true;
-      }
-  
-      if (isGroupData) {
-        if (line.trim() === endGroup) {
-          isGroupData = false;
-        } else {
-          filteredData += line + '\n';
-        }
-      }
+const storedLinkText = localStorage.getItem('linkText');
+const nextlink = localStorage.getItem('nextContent');
+
+const loadSchedule = () => {
+  fetch('../rasp1.txt')
+    .then(response => response.text())
+    .then(data => {
+      const filteredData = filterScheduleData(data, storedLinkText, nextlink);
+      parseSchedule(filteredData);
+    })
+    .catch(error => console.error('Произошла ошибка:', error));
+};
+
+const filterScheduleData = (data, startGroup, endGroup) => {
+  const lines = data.split('\n');
+  let filteredData = [];
+  let isGroupData = false;
+
+  for (let line of lines) {
+    if (line.trim() === startGroup) {
+      isGroupData = true;
+      continue;
     }
-  
-    return filteredData;
+
+    if (isGroupData && line.trim() === endGroup) {
+      isGroupData = false;
+      continue;
+    }
+
+    if (isGroupData) {
+      filteredData.push(line);
+    }
   }
-  
-const parseSchedule=(data)=>{
+
+  return filteredData.join('\n');
+};
+
+const parseSchedule = (data) => {
   const scheduleDiv = document.getElementById('schedule');
   const lines = data.split('\n');
 
@@ -43,16 +44,17 @@ const parseSchedule=(data)=>{
   for (let line of lines) {
     if (line.trim() === '') {
       scheduleDiv.appendChild(document.createElement('br'));
-      paragraphCount = 0; 
+      paragraphCount = 0;
     } else {
       const p = document.createElement('p');
       paragraphCount++;
       p.textContent = line;
-      p.id = `paragraph-${paragraphCount}`; 
+      p.id = `paragraph-${paragraphCount}`;
       scheduleDiv.appendChild(p);
     }
   }
-}
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const scheduleDiv = document.getElementById('schedule');
 
@@ -61,14 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (clickedElement.id.startsWith('paragraph-')) {
       const paragraphContent = clickedElement.textContent;
 
-      const groupPattern = /К\d+-\d+/;
+      const groupPattern = /К\d+-\d+/u;
       const groupMatch = paragraphContent.match(groupPattern);
       if (groupMatch) {
         alert(`Номер группы: ${groupMatch[0]}`);
-        return; 
+        return;
       }
 
-      const numberPattern = /\d+/;
+      const numberPattern = /\b\d{1,3}\b/;
       const match = paragraphContent.match(numberPattern);
 
       if (match) {
@@ -84,8 +86,4 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
-
-
-  
-  window.onload = loadSchedule;
+window.onload = loadSchedule;
