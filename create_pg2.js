@@ -65,20 +65,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const groupPattern = /К\d+-\d+/u;
       const groupMatch = paragraphContent.match(groupPattern);
-      if (groupMatch) {
-        alert(`Номер группы: ${groupMatch[0]}`);
-        return;
-      }
-
+      
       const numberPattern = /\b\d{1,3}\b/;
       const match = paragraphContent.match(numberPattern);
 
-      if (match) {
-        if (match[0].length === 3) {
-          alert(`Номер кабинета: ${match[0]}`);
-        } else if (match[0].length === 1) {
-          alert(`Номер пары: ${match[0]}`);
-        }
+      if (groupMatch) {
+        alert(`Номер группы: ${groupMatch[0]}`);
+      } else if (match && match[0].length === 3) {
+        alert(`Номер кабинета: ${match[0]}`);
+      } else if (match && match[0].length === 1) {
+        alert(`Номер пары: ${match[0]}`);
       } else {
         alert(`Название пары: ${clickedElement.textContent}`);
       }
