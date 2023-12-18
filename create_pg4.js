@@ -1,38 +1,26 @@
 const storedLinkText = localStorage.getItem('linkText');
-const nextlink = localStorage.getItem('nextContent');
+const regexPattern = new RegExp(`${storedLinkText}[\\s\\S]*?-`, 'u');
 
 const loadSchedule = () => {
   fetch('../rasp4.txt')
     .then(response => response.text())
     .then(data => {
-      const filteredData = filterScheduleData(data, storedLinkText, nextlink);
-      parseSchedule(filteredData);
+      const match = data.match(regexPattern);
+      if (match) {
+        const extractedText = match[0];
+        const filteredText = filterText(extractedText); 
+        parseSchedule(filteredText); 
+      } else {
+        console.log('Совпадения не найдены.');
+      }
     })
     .catch(error => console.error('Произошла ошибка:', error));
 };
 
-const filterScheduleData = (data, startGroup, endGroup) => {
-  const lines = data.split('\n');
-  let filteredData = [];
-  let isGroupData = false;
-
-  for (let line of lines) {
-    if (line.trim() === startGroup) {
-      isGroupData = true;
-      continue;
-    }
-
-    if (isGroupData && line.trim() === endGroup) {
-      isGroupData = false;
-      continue;
-    }
-
-    if (isGroupData) {
-      filteredData.push(line);
-    }
-  }
-
-  return filteredData.join('\n');
+const filterText = (text) => {
+  const lines = text.split('\n');
+  const filteredLines = lines.filter(line => !line.includes('-'));
+  return filteredLines.join('\n');
 };
 
 const parseSchedule = (data) => {
