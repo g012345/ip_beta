@@ -12,14 +12,14 @@ def my_job():
         tr_elements = soup.find_all("tr")
 
         with open("rasp5.txt", "w", encoding="utf-8") as file:
-            for tr in tr_elements[0:]:
+            for tr in tr_elements[2:]:
                 td_elements = tr.find_all("td")
                 if len(td_elements) >= 6:
                     file.write(td_elements[0].get_text(strip=True) + "\n")
                     file.write(td_elements[1].get_text(strip=True) + "\n")
                     file.write(td_elements[2].get_text(strip=True) + "\n")             
         with open("rasp5.txt", "a", encoding="utf-8") as file:
-            for tr in tr_elements[0:]:
+            for tr in tr_elements[2:]:
                 td_elements = tr.find_all("td")
                 if len(td_elements) >= 6:
                     file.write(td_elements[3].get_text(strip=True) + "\n")
