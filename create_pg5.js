@@ -1,8 +1,9 @@
 const storedLinkText = localStorage.getItem('linkText');
 const regexPattern = new RegExp(`${storedLinkText}[\\s\\S]*?-`, 'u');
-
+console.log(regexPattern)
+console.log(storedLinkText)
 const loadSchedule = () => {
-  fetch('../rasp4.txt')
+  fetch('../rasp5.txt')
     .then(response => response.text())
     .then(data => {
       const match = data.match(regexPattern);

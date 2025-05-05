@@ -29,6 +29,8 @@ def my_job():
     with open('rasp4.txt', 'w', encoding='utf-8') as file:
         file.writelines(non_empty_lines)
 
+my_job()
+
 schedule.every(2).hours.do(my_job)
 
 while True:
